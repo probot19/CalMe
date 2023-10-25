@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout tools:context=".MainActivity" android:background="@drawable/mouth" android:layout_height="match_parent" android:layout_width="match_parent" xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button android:layout_height="58dp" android:layout_width="149dp" app:layout_constraintVertical_bias="0.311" app:layout_constraintTop_toBottomOf="@+id/result" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.498" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/ans" app:cornerRadius="10dp" app:backgroundTint="#C82B2B" android:textSize="16sp" android:text="Speak Math !!" android:onClick="getspeech" android:id="@+id/button2"/>
+
+    <TextView android:layout_height="66dp" android:layout_width="282dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.496" app:layout_constraintEnd_toEndOf="parent" android:textSize="20sp" android:id="@+id/result" app:layout_constraintTop_toTopOf="parent" android:textStyle="bold|italic" android:textColor="#FFFFFF" android:layout_marginTop="36dp" android:textAlignment="center"/>
+
+    <TextView android:layout_height="49dp" android:layout_width="164dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.497" app:layout_constraintEnd_toEndOf="parent" android:textSize="34sp" android:id="@+id/ans" android:textStyle="bold" android:textColor="#F6F2F2" android:textAlignment="center" app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="92dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.widget.Button;
 import android.content.Intent;
 import org.mariuszgromada.math.mxparser.*;
@@ -17,8 +19,10 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button speakButton;
-    private TextView txt,ans;
+    private TextView txt;
+    private TextView ans;
+    private TextToSpeech textToSpeech;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -27,8 +31,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         txt=findViewById(R.id.result);
         ans=findViewById(R.id.ans);
-        //speakButton = findViewById(R.id.speakButton);
+
+        /*textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = textToSpeech.setLanguage(Locale.GERMAN);
+
+                    if (result == TextToSpeech.LANG_MISSING_DATA
+                            || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("TTS", "Language not supported");
+                    } else {
+                        //mButtonSpeak.setEnabled(true);
+                    }
+                } else {
+                    Log.e("TTS", "Initialization failed");
+                }
+            }
+        });*/
+
+        textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener(){
+            @Override
+            public void onInit(int status) {
+                if(status!=TextToSpeech.ERROR){
+                    //Toast.makeText(getBaseContext(),"Success",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        textToSpeech.setLanguage(Locale.ENGLISH);
     }
+   /* private void speak(String result) {
+        String text = result;
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }*/
 
     public void getspeech(View view) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -48,7 +83,12 @@ public class MainActivity extends AppCompatActivity {
             case 10:
                 if (resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+
                     txt.setText(result.get(0));
+
+                    // Modification
+                   // speak(result.get(0));
+
                 }
                 break;
         }
@@ -57,6 +97,6 @@ public class MainActivity extends AppCompatActivity {
         Expression exe = new Expression(s);
         String res = String.valueOf(exe.calculate());
         ans.setText(res);
-
+        textToSpeech.speak(res,TextToSpeech.QUEUE_FLUSH,null);
     }
 }
